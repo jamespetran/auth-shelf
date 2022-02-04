@@ -25,14 +25,14 @@ router.get('/', (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', (req, res) => {
   // endpoint functionality
   console.log('in POST /shelf: request is', req.body, 'user is', req.user);
   const sqlQuery = `
-  INSERT INTO item 
-    (description, image_url, user_id)
+  INSERT INTO "item" 
+    ("description", "image_url", "user_id")
   VALUES
-    ($1, $2, $3)
+    ($1, $2, $3);
   `;
   const sqlParams = [
     req.body.description,
@@ -43,8 +43,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   pool.query(sqlQuery, sqlParams)
     .then(results => res.sendStatus(200))
     .catch(err => {
-      console.log('error in POST shelf pool query', err)
-      res.status(500).send(err)
+      console.log('error in POST shelf pool query', err);
+      res.status(500).send(err);
     });
 });
 /**
