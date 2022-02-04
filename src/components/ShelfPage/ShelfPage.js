@@ -38,8 +38,6 @@ function ShelfPage() {
 
   const store = useReduxStore();
 
-  console.log('shelf store', store.shelf);
-
   useEffect(() => {
     dispatch({
       type: 'FETCH_SHELF'
