@@ -25,6 +25,18 @@ function* fetchShelf() {
   // } catch (error) {
   //   console.log('User get request failed', error);
   // }
+  console.log('in saga fetchShelf');
+
+  try {
+    // get shelf item
+    const response = yield axios.get('/api/shelf');
+    console.log('saga GET response', response.data);
+
+    yield put({type: 'SET_SHELF', payload: response.data});
+  }
+  catch (error) {
+    console.error('saga GET ERROR', error);
+  }
 }
 
 function* addItem(action) {

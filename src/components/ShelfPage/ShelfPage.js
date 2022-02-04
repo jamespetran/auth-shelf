@@ -1,12 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import useReduxStore from '../../hooks/useReduxStore';
+
+import ShelfPageItem from '../ShelfPageItem/ShelfPageItem';
 
 function ShelfPage() {
   const dispatch = useDispatch();
-  const [itemForm, setItemForm] = useState(false)
-  const [descriptionInput, setDescriptionInput] = useState('')
-  const [urlInput, setUrlInput] = useState('')
+  const [itemForm, setItemForm] = useState(false);
+  const [descriptionInput, setDescriptionInput] = useState('');
+  const [urlInput, setUrlInput] = useState('');
 
   const handleSubmit = (evt) => {
     // prevent reload
@@ -32,13 +35,14 @@ function ShelfPage() {
     setItemForm(true);
   }
 
-  const handleDelete = (item) => {
-    console.log(`in handleDelete, item to delete is ${item.id}`);
+
+  const store = useReduxStore();
+
+  useEffect(() => {
     dispatch({
-      type: 'REMOVE_ITEM',
-      payload: item
+      type: 'FETCH_SHELF'
     });
-  }
+  }, []);
 
   return (
     <div className="container">
@@ -67,7 +71,11 @@ function ShelfPage() {
         }
       </div>
       <p>All of the available items can be seen here.</p>
-
+      <div className="shelf">
+        {store.shelf.map((item, id) => (
+          <ShelfPageItem key={id} item={item} />
+        ))}
+      </div>
     </div>
   );
 }
