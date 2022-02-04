@@ -25,3 +25,7 @@ Button {
     background-color: blue;
     border-radius: 5px;
 }
+#shelf-item-container {
+  display: flex;
+  flex-flow: row wrap;
+}

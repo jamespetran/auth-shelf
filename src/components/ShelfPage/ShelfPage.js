@@ -62,7 +62,7 @@ function ShelfPage({ id }) {
 
   return (
     <div className="container">
-    
+
       <h2 className="shelfTitle">{id ? 'My Shelf' : 'Shelf'}</h2>
 
       <div id="item-add" >
@@ -91,13 +91,12 @@ function ShelfPage({ id }) {
       {/* <p>All of the available items can be seen here.</p> */}
       <Box
         component="span"
+        id="shelf-item-container"
         sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-        >
-        <Card csx={{ minWidth: 275 }}>
-            {store.shelf.map((item, id) => (
-              <ShelfPageItem key={id} item={item} />
-            ))}
-        </Card>
+      >
+        {store.shelf.map((item, id) => (
+          <ShelfPageItem key={id} item={item} />
+        ))}
       </Box>
     </div>
   );
