@@ -14,7 +14,7 @@ const ShelfPageItem = ({item}) => {
 
     return(
         <div key={item.id}>
-            <img src={item.image_url} />
+            <img src={item.image_url} style={{ height: 200, width: 200 }}/>
             <p>{item.description}</p>
             <button onClick={() => handleDelete(item)}>Delete</button>
         </div>
