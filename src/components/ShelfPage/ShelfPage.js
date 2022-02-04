@@ -67,18 +67,6 @@ function ShelfPage() {
         }
       </div>
       <p>All of the available items can be seen here.</p>
-      <ul>
-        {testItems.map(item => (
-          <li key={item.id}>
-            <div>
-              <img src={item.image_url} style={{ height: 200, width: 200 }} />
-              {item.description}
-              {item.user_id}
-              <button onClick={() => handleDelete(item)}>Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
 
     </div>
   );
