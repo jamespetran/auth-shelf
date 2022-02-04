@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function ShelfPage() {
+  const dispatch = useDispatch();
   const [itemForm, setItemForm] = useState(false)
   const [descriptionInput, setDescriptionInput] = useState('')
   const [urlInput, setUrlInput] = useState('')
@@ -10,8 +12,16 @@ function ShelfPage() {
     // prevent reload
     evt.preventDefault();
     //do... this
-    console.log('description:', descriptionInput, ' & url:', urlInput);
-    
+    const newItem = {
+      description: descriptionInput,
+      image_url: urlInput
+    }
+    console.log(newItem);
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: newItem
+    })
+
     //clear inputs and set item form back to false to remove it from DOM
     setDescriptionInput('');
     setUrlInput('');
