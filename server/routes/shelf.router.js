@@ -22,6 +22,27 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+  // res.sendStatus(200); // For testing only, can be removed
+  const queryText = `
+    SELECT * FROM "item"
+    WHERE user_id = $1;
+  `;
+
+  const queryParams = [
+    req.params.id
+  ]
+
+  pool.query(queryText, queryParams)
+    .then((result) => {
+      console.log('result', result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.error('pool GET ERROR', err);
+    });
+});
+
 /**
  * Add an item for the logged in user to the shelf
  */
