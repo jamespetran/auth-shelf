@@ -19,7 +19,7 @@ const ShelfPageItem = ({item}) => {
     }
 
     return(
-        <Card key={item.id} csx={{ m: 2 }}>
+        <Card key={item.id} sx={{ m: 2 }}>
             <CardContent>
             <img src={item.image_url} style={{ height: 200, width: 200 }}/>
             <p>{item.description}</p>
