@@ -1,0 +1,27 @@
+Box {
+    margin: 1rem;
+}
+
+Card {
+    margin: 1rem;
+}
+
+#item-form {
+    position: relative;
+    left: 35%;
+}
+
+Button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.shelfTitle {
+    text-align: center;
+}
+
+#submit {
+    background-color: blue;
+    border-radius: 5px;
+}
