@@ -29,8 +29,9 @@ function* fetchShelf() {
   try {
     // get shelf item
     const response = yield axios.get('/api/shelf');
+    console.log('saga GET response', response.rows);
 
-
+    yield put({type: 'SET_SHELF', payload: response.rows});
   }
   catch (error) {
     console.error('saga GET ERROR', error);
@@ -41,8 +42,10 @@ function* addItem() {
   //add item here
 }
 
-function* removeItem() {
+function* removeItem(action) {
   //remove item here
+  console.log(`in removeItem in shelf.saga, item to delete is ${action.payload}`)
+  axios.delete(`/api/shelf/${action.payload.id}`)
 }
 
 function* userSaga() {

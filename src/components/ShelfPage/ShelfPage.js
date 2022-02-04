@@ -10,11 +10,13 @@ function ShelfPage() {
   const dispatch = useDispatch();
   const store = useReduxStore;
 
+  console.log('shelf store', store.shelfReducer);
+
   useEffect(() => {
     dispatch({
       type: 'FETCH_SHELF'
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container">
