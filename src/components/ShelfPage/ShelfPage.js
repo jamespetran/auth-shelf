@@ -62,7 +62,9 @@ function ShelfPage({ id }) {
 
   return (
     <div className="container">
-      <h2 className="shelfTitle">Shelf</h2>
+    
+      <h2 className="shelfTitle">{id ? 'My Shelf' : 'Shelf'}</h2>
+
       <div id="item-add" >
         {itemForm ?
           <form id="item-form" onSubmit={(evt) => handleSubmit(evt)}>
@@ -86,7 +88,7 @@ function ShelfPage({ id }) {
           <Button variant="contained" onClick={() => addItem()} > Add Item </Button>
         }
       </div>
-      <p>All of the available items can be seen here.</p>
+      {/* <p>All of the available items can be seen here.</p> */}
       <Box
         component="span"
         sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
