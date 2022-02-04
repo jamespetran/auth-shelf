@@ -43,8 +43,15 @@ function* addItem(action) {
 
 function* removeItem(action) {
   //remove item here
-  console.log(`in removeItem in shelf.saga, item to delete is ${action.payload}`)
-  axios.delete(`/api/shelf/${action.payload.id}`)
+  console.log('in removeItem in shelf.saga, item to delete is', action.payload)
+  try {
+    const response = axios.delete(`/api/shelf/${action.payload.id}`, action.payload);
+    yield put({ type: 'SET_SHELF' });
+  } catch {
+    console.error('Unauthorized to delete requested item');
+    throw('403 Forbidden');
+  }
+
 }
 
 function* userSaga() {
