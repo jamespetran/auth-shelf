@@ -13,10 +13,28 @@ router.get('/', (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
-});
+  console.log('in POST /shelf: request is', req.body, 'user is', req.user);
+  const sqlQuery = `
+  INSERT INTO item 
+    (description, image_url, user_id)
+  VALUES
+    ($1, $2, $3)
+  `;
+  const sqlParams = [
+    req.body.description,
+    req.body.image_url,
+    req.user.id
+  ];
 
+  pool.query(sqlQuery, sqlParams)
+    .then(results => res.sendStatus(200))
+    .catch(err => {
+      console.log('error in POST shelf pool query', err)
+      res.status(500).send(err)
+    });
+  });
 /**
  * Delete an item if it's something the logged in user added
  */
@@ -43,26 +61,26 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 });
 
-/**
- * Update an item if it's something the logged in user added
- */
-router.put('/:id', (req, res) => {
-  // endpoint functionality
-});
+  /**
+   * Update an item if it's something the logged in user added
+   */
+  router.put('/:id', (req, res) => {
+    // endpoint functionality
+  });
 
-/**
- * Return all users along with the total number of items
- * they have added to the shelf
- */
-router.get('/count', (req, res) => {
-  // endpoint functionality
-});
+  /**
+   * Return all users along with the total number of items
+   * they have added to the shelf
+   */
+  router.get('/count', (req, res) => {
+    // endpoint functionality
+  });
 
-/**
- * Return a specific item by id
- */
-router.get('/:id', (req, res) => {
-  // endpoint functionality
-});
+  /**
+   * Return a specific item by id
+   */
+  router.get('/:id', (req, res) => {
+    // endpoint functionality
+  });
 
-module.exports = router;
+  module.exports = router;
