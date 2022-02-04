@@ -19,7 +19,7 @@ import ShelfPage from '../ShelfPage/ShelfPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import UserShelf from '../UserShelf/UserShelf';
 import './App.css';
 
 function App() {
@@ -67,7 +67,12 @@ function App() {
           >
             <ShelfPage />
           </ProtectedRoute>
-
+          
+          <ProtectedRoute
+            path="/shelf/:id"
+            component={UserShelf}
+            />
+            
           <Route
             exact
             path="/login"

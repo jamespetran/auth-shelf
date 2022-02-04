@@ -5,7 +5,7 @@ import useReduxStore from '../../hooks/useReduxStore';
 
 import ShelfPageItem from '../ShelfPageItem/ShelfPageItem';
 
-function ShelfPage() {
+function ShelfPage({ id }) {
   const dispatch = useDispatch();
   const [itemForm, setItemForm] = useState(false);
   const [descriptionInput, setDescriptionInput] = useState('');
@@ -38,11 +38,21 @@ function ShelfPage() {
 
   const store = useReduxStore();
 
-  useEffect(() => {
-    dispatch({
-      type: 'FETCH_SHELF'
-    });
-  }, []);
+  // if an id is passed down, client is in My Shelf view, so pull user specific items, if no id pull all
+  if (id) {
+    useEffect(() => {
+      dispatch({
+        type: 'FETCH_USER_SHELF',
+        payload: id
+      });
+    }, []);
+  } else {
+    useEffect(() => {
+      dispatch({
+        type: 'FETCH_SHELF'
+      });
+    }, []);
+  }
 
   return (
     <div className="container">
