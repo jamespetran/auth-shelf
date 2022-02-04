@@ -33,13 +33,12 @@ router.post('/', (req, res) => {
       console.log('error in POST shelf pool query', err)
       res.status(500).send(err)
     });
-});
-
   /**
    * Delete an item if it's something the logged in user added
    */
   router.delete('/:id', (req, res) => {
     // endpoint functionality
+    console.log(`In DELETE /${req.params.id}`);
   });
 
   /**
