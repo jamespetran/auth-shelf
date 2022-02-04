@@ -37,7 +37,7 @@ function ShelfPage() {
       <p>All of the available items can be seen here.</p>
       <ul>
         { testItems.map( item => (
-          <li>
+          <li key={item.id}>
             <div>
               <img src={item.image_url} style={{ height: 200, width: 200 }}/>
               {item.description}
