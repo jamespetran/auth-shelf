@@ -30,9 +30,9 @@ function* fetchShelf() {
   try {
     // get shelf item
     const response = yield axios.get('/api/shelf');
-    console.log('saga GET response', response.rows);
+    console.log('saga GET response', response.data);
 
-    yield put({type: 'SET_SHELF', payload: response.rows});
+    yield put({type: 'SET_SHELF', payload: response.data});
   }
   catch (error) {
     console.error('saga GET ERROR', error);

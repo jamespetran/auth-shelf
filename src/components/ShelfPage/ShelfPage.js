@@ -1,14 +1,15 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import useReduxStore from '../../hooks/useReduxStore';
 
 import ShelfPageItem from '../ShelfPageItem/ShelfPageItem';
 
 function ShelfPage() {
   const dispatch = useDispatch();
-  const [itemForm, setItemForm] = useState(false)
-  const [descriptionInput, setDescriptionInput] = useState('')
-  const [urlInput, setUrlInput] = useState('')
+  const [itemForm, setItemForm] = useState(false);
+  const [descriptionInput, setDescriptionInput] = useState('');
+  const [urlInput, setUrlInput] = useState('');
 
   const handleSubmit = (evt) => {
     // prevent reload
@@ -35,15 +36,15 @@ function ShelfPage() {
   }
 
 
-  const store = useReduxStore;
+  const store = useReduxStore();
 
-  console.log('shelf store', store.shelfReducer);
+  console.log('shelf store', store.shelf);
 
   useEffect(() => {
     dispatch({
       type: 'FETCH_SHELF'
     });
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="container">
@@ -65,7 +66,7 @@ function ShelfPage() {
               value={urlInput}
               onChange={(evt) => setUrlInput(evt.currentTarget.value)}
             />
-            <input type="submit"/ >
+            <input type="submit" />
           </form>
           :
           <button onClick={() => addItem()} > Add Item </button>
@@ -73,7 +74,7 @@ function ShelfPage() {
       </div>
       <p>All of the available items can be seen here.</p>
       <div className="shelf">
-        {store.shelfReducer.map((item, id) => (
+        {store.shelf.map((item, id) => (
           <ShelfPageItem key={id} item={item} />
         ))}
       </div>
