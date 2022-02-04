@@ -30,8 +30,10 @@ function* addItem() {
   //add item here
 }
 
-function* removeItem() {
+function* removeItem(action) {
   //remove item here
+  console.log(`in removeItem in shelf.saga, item to delete is ${action.payload}`)
+  axios.delete(`/api/shelf/${action.payload.id}`)
 }
 
 function* userSaga() {

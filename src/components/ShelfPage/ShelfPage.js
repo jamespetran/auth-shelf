@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 function ShelfPage() {
+
+  const dispatch = useDispatch();
   
   let testItems = [
     { id: 1,
@@ -22,6 +25,10 @@ function ShelfPage() {
 
   const handleDelete = (item) => {
     console.log(`in handleDelete, item to delete is ${item.id}`);
+    dispatch({
+      type: 'REMOVE_ITEM',
+      payload: item
+    });
   }
 
   return (
