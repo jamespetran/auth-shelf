@@ -1,9 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
+import * as React from 'react';
+
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
 
 import ShelfPageItem from '../ShelfPageItem/ShelfPageItem';
+import './ShelfPage.css';
 
 function ShelfPage({ id }) {
   const dispatch = useDispatch();
@@ -35,7 +42,6 @@ function ShelfPage({ id }) {
     setItemForm(true);
   }
 
-
   const store = useReduxStore();
 
   // if an id is passed down, client is in My Shelf view, so pull user specific items, if no id pull all
@@ -56,7 +62,9 @@ function ShelfPage({ id }) {
 
   return (
     <div className="container">
-      <h2>Shelf</h2>
+    
+      <h2 className="shelfTitle">{id ? 'My Shelf' : 'Shelf'}</h2>
+
       <div id="item-add" >
         {itemForm ?
           <form id="item-form" onSubmit={(evt) => handleSubmit(evt)}>
@@ -74,18 +82,23 @@ function ShelfPage({ id }) {
               value={urlInput}
               onChange={(evt) => setUrlInput(evt.currentTarget.value)}
             />
-            <input type="submit" />
+            <input id="submit" type="submit" />
           </form>
           :
-          <button onClick={() => addItem()} > Add Item </button>
+          <Button variant="contained" onClick={() => addItem()} > Add Item </Button>
         }
       </div>
-      <p>All of the available items can be seen here.</p>
-      <div className="shelf">
-        {store.shelf.map((item, id) => (
-          <ShelfPageItem key={id} item={item} />
-        ))}
-      </div>
+      {/* <p>All of the available items can be seen here.</p> */}
+      <Box
+        component="span"
+        sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+        >
+        <Card csx={{ minWidth: 275 }}>
+            {store.shelf.map((item, id) => (
+              <ShelfPageItem key={id} item={item} />
+            ))}
+        </Card>
+      </Box>
     </div>
   );
 }
