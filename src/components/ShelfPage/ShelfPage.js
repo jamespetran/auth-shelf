@@ -16,7 +16,7 @@ function ShelfPage() {
       description: descriptionInput,
       image_url: urlInput
     }
-    console.log(newItem);
+    // console.log(newItem);
     dispatch({
       type: 'ADD_ITEM',
       payload: newItem

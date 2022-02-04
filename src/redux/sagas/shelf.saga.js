@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchShelf() {
   // fetch shelf
-  
+
   // try {
   //   const config = {
   //     headers: { 'Content-Type': 'application/json' },
@@ -26,8 +27,18 @@ function* fetchShelf() {
   // }
 }
 
-function* addItem() {
+function* addItem(action) {
   //add item here
+  try {
+
+  yield axios.post('/api/shelf', action.payload);
+  yield put({
+    type: 'FETCH_SHELF'
+  });
+}
+  catch (err) {
+  console.error('error in ADD_ITEM', err)
+}
 }
 
 function* removeItem() {
